@@ -39,6 +39,16 @@ public class EmailSender {
 
         try {
             // Create a default MimeMessage object
+            MimeMessage message = createMimeMessage();
+            // Send message
+            Transport.send(message);
+            System.out.println("Message sent successfully.");
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+    }
+
+    public MimeMessage createMimeMessage() {
             MimeMessage message = new MimeMessage(session);
 
             // Set From: header field of the header.
@@ -54,11 +64,6 @@ public class EmailSender {
             // Set the actual message
             message.setText("This is Email body");
 
-            // Send message
-            Transport.send(message);
-            System.out.println("Message sent successfully.");
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
-        }
+        return message;
     }
 }
